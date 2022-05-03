@@ -1,0 +1,1 @@
+celery -A user_service worker -l info
