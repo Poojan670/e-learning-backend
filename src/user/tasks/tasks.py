@@ -5,9 +5,10 @@ from django.conf import settings
 from time import sleep
 
 
-@shared_task
+@shared_task(bind=True, max_retries=20)
 def register_mail(email, otp):
-    sleep(2)  # sleeps for 2 seconds
+    print("Done")
+    sleep(1)  # sleeps for 1 seconds
     email_template = render_to_string('register.html',
                                       {"otp": otp})
     sign_up = EmailMultiAlternatives(
@@ -20,9 +21,9 @@ def register_mail(email, otp):
     sign_up.send()
 
 
-@shared_task
+@shared_task(bind=True, max_retries=20)
 def verify_mail(email):
-    sleep(2)
+    sleep(1)
     email_template = render_to_string('success.html')
     success = EmailMultiAlternatives(
         "Registration Successful",
@@ -34,9 +35,9 @@ def verify_mail(email):
     success.send()
 
 
-@shared_task
+@shared_task(bind=True, max_retries=20)
 def forgot_mail(email, otp):
-    sleep(2)
+    sleep(1)
     email_template = render_to_string('forgot.html',
                                       {"otp": otp})
     forgot = EmailMultiAlternatives(
@@ -49,9 +50,9 @@ def forgot_mail(email, otp):
     forgot.send()
 
 
-@shared_task
+@shared_task(bind=True, max_retries=20)
 def reset_mail(email):
-    sleep(2)
+    sleep(1)
     email_template = render_to_string('reset.html')
     reset = EmailMultiAlternatives(
         "Password Reset",
@@ -63,9 +64,9 @@ def reset_mail(email):
     reset.send()
 
 
-@shared_task
+@shared_task(bind=True, max_retries=20)
 def subscribed_mail(email):
-    sleep(2)
+    sleep(1)
     email_template = render_to_string('subscibe.html',
                                       {
                                           "email": email

@@ -17,6 +17,7 @@ def send_emails(data):
         try:
             for i in range(0, length):
                 subscribed_mail.delay(email[i])
+                print("Hello")
             print("Email Sent!")
         except Exception as e:
             print(str(e))

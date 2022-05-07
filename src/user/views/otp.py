@@ -21,6 +21,7 @@ class OtpKey():
 
 class OTPVerifyView(generics.CreateAPIView):
 
+    queryset = User.objects.all()
     serializer_class = VerifyUser
 
     def post(self, request, pk, *args, **kwargs):

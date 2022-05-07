@@ -7,21 +7,21 @@ class TutorialsHeaderSerializer(serializers.ModelSerializer):
     class Meta:
         model = TutorialsHeader
         fields = '__all__'
-        read_only_fields = ('created_at', 'updated_at')
+        read_only_fields = ('created_at', 'updated_at', )
 
 
 class TutorialsPageSerializer(ModelSerializer):
     class Meta:
         model = Tutorial
         fields = '__all__'
-        read_only_fields = ('created_at', 'updated_at', 'language')
+        read_only_fields = ('created_at', 'updated_at', 'language', )
 
 
 class SubTutorialsSerializer(ModelSerializer):
     class Meta:
         model = SubTutorial
         fields = '__all__'
-        read_only_fields = ('created_at', 'updated_at', 'tutorials_title')
+        read_only_fields = ('created_at', 'updated_at', 'tutorials_title', )
 
 
 class SubTutorialsNameSerializer(ModelSerializer):
@@ -43,7 +43,7 @@ class SubTopicsSerializer(ModelSerializer):
     class Meta:
         model = SubTopic
         fields = '__all__'
-        read_only_fields = ('created_at', 'updated_at', 'topic')
+        read_only_fields = ('created_at', 'updated_at', 'topic', )
 
 
 class SubTopicsNameSerializer(ModelSerializer):
@@ -66,7 +66,7 @@ class SubDetailSerializer(ModelSerializer):
     class Meta:
         model = SubDetail
         fields = '__all__'
-        read_only_fields = ('created_at', 'updated_at', 'relation')
+        read_only_fields = ('created_at', 'updated_at', 'relation', )
 
 
 class SubDetailIdSerializer(ModelSerializer):

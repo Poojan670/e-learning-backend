@@ -5,6 +5,7 @@ from rest_framework import status
 from src.home.models import Languages
 from django_filters.rest_framework import DjangoFilterBackend
 from src.user.permissions.permissions import IsAdminOrReadOnly
+from rest_framework import viewsets
 
 
 class TutorialsHeaderCreateView(CreateAPIView):
@@ -15,7 +16,7 @@ class TutorialsHeaderCreateView(CreateAPIView):
 
 class TutorialsHeaderListView(ListAPIView):
     permission_classes = [IsAdminOrReadOnly]
-    queryset = TutorialsHeader.objects.all()
+    queryset = TutorialsHeader.objects.all().order_by('created_at')
     serializer_class = TutorialsHeaderSerializer
 
 
@@ -51,8 +52,7 @@ class TutorialsCreateView(CreateAPIView):
 
 class TutorialsListView(ListAPIView):
     permission_classes = [IsAdminOrReadOnly]
-    queryset = Tutorial.objects.all()
-    # queryset = Tutorials.objects.filter(language__name__contains="Python")
+    queryset = Tutorial.objects.all().order_by('created_at')
     serializer_class = TutorialsPageIdSerializer
 
     filter_backends = [DjangoFilterBackend]
@@ -91,7 +91,7 @@ class SubTutorialsCreateView(CreateAPIView):
 
 class SubTutorialsListView(ListAPIView):
     permission_classes = [IsAdminOrReadOnly]
-    queryset = SubTutorial.objects.all()
+    queryset = SubTutorial.objects.all().order_by('created_at')
     serializer_class = SubTutorialsIdSerializer
 
     filter_backends = [DjangoFilterBackend]
@@ -135,7 +135,7 @@ class SubTopicsCreateView(CreateAPIView):
 
 class SubTopicsListView(ListAPIView):
     permission_classes = [IsAdminOrReadOnly]
-    queryset = SubTopic.objects.all()
+    queryset = SubTopic.objects.all().order_by('created_at')
     serializer_class = SubTopicsIdSerializer
 
 
@@ -173,7 +173,7 @@ class SubDetailCreateView(CreateAPIView):
 
 class SubDetailListView(ListAPIView):
     permission_classes = [IsAdminOrReadOnly]
-    queryset = SubDetail.objects.all()
+    queryset = SubDetail.objects.all().order_by('created_at')
     serializer_class = SubDetailIdSerializer
 
 

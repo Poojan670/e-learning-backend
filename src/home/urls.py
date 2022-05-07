@@ -4,6 +4,7 @@ from src.home.views import (
     header, subscribe, bodyheader,
     body, languages, email
 )
+app_name = 'home'
 
 router = routers.DefaultRouter()
 
@@ -18,7 +19,6 @@ router.register(r'body', body.BodyView, basename='body')
 
 router.register(r'langugaes', languages.LanguagesView, basename='langugaes')
 
-app_name = 'home'
 
 urlpatterns = [
     path('', include(router.urls)),

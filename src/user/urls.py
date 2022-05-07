@@ -15,6 +15,8 @@ from src.user.views.auth import (
 
 from src.user.views.subscribe import SendEmailsView
 
+from src.user.views.password import ForgotPasswordPhoneView, ResetPasswordEmailView
+
 app_name = 'user'
 
 
@@ -42,8 +44,18 @@ auth_patterns = [
 
 ]
 
+password_patterns = [
+    path('forgot/password/<pk>/', ForgotPasswordPhoneView.as_view(),
+         name='forgot-password'),
+    path('reset/password/<pk>/',
+         ForgotPasswordPhoneView.as_view(), name='reset-password'),
+]
+
+
 subscribe_patterns = [
     path('send/mail/', SendEmailsView.as_view(), name="send-email")
 ]
 
-urlpatterns = user_patterns + otp_patterns + auth_patterns + subscribe_patterns
+
+urlpatterns = user_patterns + otp_patterns + \
+    auth_patterns + password_patterns + subscribe_patterns

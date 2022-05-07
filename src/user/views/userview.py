@@ -9,7 +9,7 @@ from src.user.tasks.tasks import register_mail
 from src.user.serializer.user_serializer import (
     RegisterSerializer, RegisteredUsersIdSerializer,
     UpdateUserDetailsSerializer, DeleteUserSerializer,
-    ChangePasswordSerializer
+    ChangePasswordSerializer, UserProfile
 )
 from src.user.permissions.permissions import (
     IsAdminUser,
@@ -46,8 +46,7 @@ class RegisterUser(generics.CreateAPIView):
             user.save()
 
             return Response({"user_id": user.id,
-                             "email": user.email,
-                             "otp_code": user.otp}, status=status.HTTP_201_CREATED)
+                             "email": user.email}, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
@@ -60,7 +59,7 @@ class RegisteredUsersList(generics.ListAPIView):
 class UserDetail(generics.RetrieveAPIView):
     permission_classes = [UserObjectPermission]
     queryset = User.objects.all()
-    serializer_class = RegisterSerializer
+    serializer_class = UserProfile
 
 
 class UpdateUserDetail(generics.RetrieveUpdateAPIView):

@@ -5,16 +5,14 @@ from src.user.models import User
 from django.utils.translation import gettext_lazy as _
 from datetime import date, timedelta
 from django_countries.fields import CountryField
+from src.courses.models import Course
 
 
 class ContactInfo(models.Model):
 
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-
     email = models.EmailField(_('*Email Address'), null=False)
-
     name = models.CharField(_('*Name'), max_length=255, blank=True, null=True)
-
     is_agree = models.BooleanField(
         help_text="I agree to receive instructional and promotional emails. (optional)",
         default=False)
@@ -25,6 +23,8 @@ class ContactInfo(models.Model):
 
 class PaymentModel(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+
+    course = models.ForeignKey(Course, on_delete=models.PROTECT)
 
     billing = models.ForeignKey(
         BillingModel, on_delete=models.CASCADE, related_name='billings')

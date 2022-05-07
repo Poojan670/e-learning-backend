@@ -15,19 +15,27 @@ class RegisterSerializer(serializers.ModelSerializer):
         model = User
         fields = ['email', 'password']
         read_only_fields = ('id', 'created_at', 'updated_at',
-                            'otp', 'activation_key', 'is_active')
+                            'otp', 'activation_key', 'is_active', )
 
 
 class RegisteredUsersIdSerializer(serializers.ModelSerializer):
+
     class Meta:
         model = User
-        fields = ['id']
+        fields = ['id', 'email']
 
 
 class UpdateUserDetailsSerializer(serializers.ModelSerializer):
+
     class Meta:
         model = User
-        fields = ['full_name', 'gender']
+        fields = ['full_name', 'profile_pic', 'gender']
+
+
+class UserProfile(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['email', 'gender', 'full_name', 'is_active']
 
 
 class ChangePasswordSerializer(serializers.ModelSerializer):

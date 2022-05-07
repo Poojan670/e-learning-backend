@@ -5,6 +5,7 @@ from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenViewBase
 from src.user.serializer.token_serializer import MyTokenObtainPairSerializer
 from rest_framework.response import Response
+from rest_framework.views import APIView
 
 
 class LoginView(TokenObtainPairView):
@@ -17,7 +18,7 @@ class LoginView(TokenObtainPairView):
     serializer_class = MyTokenObtainPairSerializer
 
 
-class LogOutView(generics.CreateAPIView):
+class LogOutView(APIView):
     # logout by blacklisting user's access token
     permission_classes = [IsAuthenticated, ]
 

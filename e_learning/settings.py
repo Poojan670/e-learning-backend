@@ -16,17 +16,17 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = env('SECRET_KEY')
+SECRET_KEY = env.str('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = env.bool('DJANGO_DEBUG')
 
 SECURE_SSL_REDIRECT = False
 SESSION_COOKIE_SECURE = False
 CSRF_COOKIE_SECURE = False
 SECURE_REDIRECT_EXEMPT = ['https://127.0.0.1:8000/']
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
+ALLOWED_HOSTS = env.list('ALLOWED_HOSTS')
 
 
 # Application definition
@@ -53,6 +53,7 @@ EXTERNAL_APPS = [
     'django_cleanup.apps.CleanupConfig',
     'django_filters',
     'django_countries',
+    'drf_yasg',
 ]
 
 INTERNAL_APPS = [
@@ -64,6 +65,7 @@ INTERNAL_APPS = [
     'src.examples',
     'src.references',
     'src.blog',
+    'src.courses',
 ]
 
 INSTALLED_APPS = BUILTIN_APPS + EXTERNAL_APPS + INTERNAL_APPS
@@ -103,7 +105,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'e_learning.wsgi.application'
-
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases

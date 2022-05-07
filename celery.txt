@@ -1,1 +1,11 @@
-celery -A user_service worker -l info
+# working !
+celery -A e_learning worker --loglevel=INFO --concurrency 1 -P solo
+
+
+# errors!
+celery -A e_learning worker -l info
+celery -A e_learning worker -l info --without-gossip
+celery -A e_learning worker --pool=solo --loglevel=info
+celery -A e_learning worker -l info --without-gossip --without-mingle
+celery -A e_learning worker --loglevel=INFO --without-gossip --without-mingle --without-heartbeat -Ofair
+

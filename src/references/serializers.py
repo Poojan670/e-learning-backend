@@ -7,21 +7,21 @@ class ReferencesHeaderSerializer(serializers.ModelSerializer):
     class Meta:
         model = ReferencesHeader
         fields = '__all__'
-        read_only_fields = ('created_at', 'updated_at')
+        read_only_fields = ('created_at', 'updated_at', )
 
 
 class ReferencesTitleSerializer(ModelSerializer):
     class Meta:
         model = ReferencesTitle
         fields = '__all__'
-        read_only_fields = ('created_at', 'updated_at', 'language')
+        read_only_fields = ('created_at', 'updated_at', 'language', )
 
 
 class SubReferencesSerializer(ModelSerializer):
     class Meta:
         model = SubReferences
         fields = '__all__'
-        read_only_fields = ('created_at', 'updated_at', 'reference_title')
+        read_only_fields = ('created_at', 'updated_at', 'reference_title', )
 
 
 class SubReferencesNameSerializer(ModelSerializer):
@@ -43,7 +43,7 @@ class ReferencesDetailSerializer(ModelSerializer):
     class Meta:
         model = ReferencesDetail
         fields = '__all__'
-        read_only_fields = ('created_at', 'updated_at', 'sub_references')
+        read_only_fields = ('created_at', 'updated_at', 'sub_references', )
 
 
 class ReferencesDetailIdSerializer(ModelSerializer):

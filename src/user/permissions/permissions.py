@@ -8,9 +8,6 @@ class IsAdminOrReadOnly(BasePermission):
         else:
             return bool(request.user and request.user.is_staff)
 
-# UserObjectOrReadOnly
-
-
 class AdminAllUserObjectAllOrReadOnly(BasePermission):
 
     edit_methods = ("PUT", "PATCH")

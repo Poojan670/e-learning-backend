@@ -10,14 +10,14 @@ class ExamplesHeaderSerializer(serializers.ModelSerializer):
     class Meta:
         model = ExamplesHeader
         fields = '__all__'
-        read_only_fields = ('created_at', 'updated_at')
+        read_only_fields = ('created_at', 'updated_at', )
 
 
 class ExampleCategorySerializer(ModelSerializer):
     class Meta:
         model = ExampleCategory
         fields = '__all__'
-        read_only_fields = ('created_at', 'updated_at', 'language')
+        read_only_fields = ('created_at', 'updated_at', 'language', )
 
 
 class ExampleTitleSerializer(ModelSerializer):
@@ -25,7 +25,7 @@ class ExampleTitleSerializer(ModelSerializer):
         model = ExampleTitle
         fields = '__all__'
         read_only_fields = ('created_at', 'updated_at',
-                            'example_category', 'is_popular')
+                            'example_category', 'is_popular', )
 
 
 class ExampleTitleNameSerializer(ModelSerializer):
@@ -47,7 +47,7 @@ class ExampleDetailSerializer(ModelSerializer):
     class Meta:
         model = ExampleDetail
         fields = '__all__'
-        read_only_fields = ('created_at', 'updated_at', 'relation')
+        read_only_fields = ('created_at', 'updated_at', 'relation', )
 
 
 class ExampleDetailIdSerializer(ModelSerializer):

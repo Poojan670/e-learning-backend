@@ -9,20 +9,20 @@ class HeaderSerializer(ModelSerializer):
     class Meta:
         model = header
         fields = '__all__'
-        read_only_fields = ['id']
+        read_only_fields = ('id', )
 
 
 class HeaderIdSerializer(ModelSerializer):
     class Meta:
         model = header
-        fields = ['id']
+        fields = ('id', )
 
 
 class SubscribeSerializer(ModelSerializer):
     class Meta:
         model = Subscribe
         fields = '__all__'
-        read_only_fields = ['id', 'subscribed_at']
+        read_only_fields = ('id', 'subscribed_at', )
 
 
 class SubscribeIdSerializer(ModelSerializer):
@@ -35,7 +35,7 @@ class BodySerializer(ModelSerializer):
     class Meta:
         model = Body
         fields = '__all__'
-        read_only_fields = ['id', 'created_at']
+        read_only_fields = ('id', 'created_at', )
 
 
 class BodyIdSerializer(ModelSerializer):
@@ -48,7 +48,7 @@ class LanguagesSerializer(ModelSerializer):
     class Meta:
         model = Languages
         fields = '__all__'
-        read_only_fields = ['id', 'created_at', 'updated_at']
+        read_only_fields = ('id', 'created_at', 'updated_at', )
 
 
 class LanguagesIdSerializer(ModelSerializer):

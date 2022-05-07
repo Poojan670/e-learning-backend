@@ -5,6 +5,14 @@ from django.contrib.auth.base_user import BaseUserManager
 from django.utils.translation import gettext as _
 
 
+def user_directory_path(instance, filename):
+    return "users/{0}/{1}".format(instance.user.email, filename)
+
+
+def national_image_path(instance, filename):
+    return f"national/{instance.user.username}/images/{filename}"
+
+
 class CustomUserManager(BaseUserManager):
 
     def create_user(self, email, password, full_name, ** other_fields):
@@ -66,6 +74,8 @@ class User(AbstractBaseUser, PermissionsMixin):
     activation_key = models.CharField(
         max_length=150, blank=True, null=True)
 
+    profile_pic = models.ImageField(upload_to=user_directory_path, blank=True)
+
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -90,3 +100,12 @@ class User(AbstractBaseUser, PermissionsMixin):
     def get_full_name(self):
         full_name = '%s' % (self.full_name)
         return full_name
+
+
+class DeactivateUser(models.Model):
+    user = models.OneToOneField(
+        User, related_name="deactivate", on_delete=models.CASCADE
+    )
+    deactive = models.BooleanField(default=True)
+
+    deactivated_at = models.DateTimeField(auto_now_add=True)
