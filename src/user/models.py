@@ -6,11 +6,7 @@ from django.utils.translation import gettext as _
 
 
 def user_directory_path(instance, filename):
-    return "users/{0}/{1}".format(instance.user.email, filename)
-
-
-def national_image_path(instance, filename):
-    return f"national/{instance.user.username}/images/{filename}"
+    return "users/{}/{}".format(instance.email, filename)
 
 
 class CustomUserManager(BaseUserManager):
@@ -47,40 +43,28 @@ class CustomUserManager(BaseUserManager):
 
 class User(AbstractBaseUser, PermissionsMixin):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-
     email = models.EmailField(verbose_name=_('email address'), unique=True,
                               null=False, blank=False, help_text="Please enter your email address..")
-
     MALE = 'M'
     FEMALE = 'F'
     OTHER = 'NaN'
-
     gender_choices = (
         (MALE, 'Male'),
         (FEMALE, 'Female'),
         (OTHER, 'Rather not say')
     )
-
     gender = models.CharField(choices=gender_choices,
                               max_length=3, default=OTHER)
-
     full_name = models.CharField(verbose_name=_('Full Name'), max_length=60,
                                  blank=False, null=True, help_text="Please enter your full nmae")
-
     is_active = models.BooleanField(_('is_verified'), default=False)
-
     otp = models.IntegerField(null=True, blank=True)
-
     activation_key = models.CharField(
         max_length=150, blank=True, null=True)
-
     profile_pic = models.ImageField(upload_to=user_directory_path, blank=True)
-
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-
     is_staff = models.BooleanField(default=False)
-
     is_superuser = models.BooleanField(default=False)
 
     objects = CustomUserManager()

@@ -12,8 +12,6 @@ router.register(r'shipping', views.ShippingView, basename='shippings')
 
 router.register(r'delivery', views.DeliveryView, basename='deliveries')
 
-router.register(r'contact', views.ContactView, basename='contacts')
-
 
 urlpatterns = [
     path('', include(router.urls)),

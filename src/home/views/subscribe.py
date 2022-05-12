@@ -5,7 +5,7 @@ from src.user.permissions.permissions import IsAdminUser, IsAdminOrReadOnly
 
 
 class SubscribeView(viewsets.ModelViewSet):
-    queryset = Subscribe.objects.all().order_by('subscribed_at')
+    queryset = Subscribe.objects.all().order_by('id')
     serializer_class = SubscribeSerializer
 
     def get_permissions(self):

@@ -8,8 +8,7 @@ from .models import (
 class HeaderSerializer(ModelSerializer):
     class Meta:
         model = header
-        fields = '__all__'
-        read_only_fields = ('id', )
+        fields = ['title', 'description', 'sub_title', 'side_image']
 
 
 class HeaderIdSerializer(ModelSerializer):
@@ -22,7 +21,7 @@ class SubscribeSerializer(ModelSerializer):
     class Meta:
         model = Subscribe
         fields = '__all__'
-        read_only_fields = ('id', 'subscribed_at', )
+        read_only_fields = ('id', 'created_at', 'updated_at')
 
 
 class SubscribeIdSerializer(ModelSerializer):
@@ -35,7 +34,7 @@ class BodySerializer(ModelSerializer):
     class Meta:
         model = Body
         fields = '__all__'
-        read_only_fields = ('id', 'created_at', )
+        read_only_fields = ('id', 'created_at', 'updated_at')
 
 
 class BodyIdSerializer(ModelSerializer):
@@ -61,4 +60,4 @@ class BodyHeaderSerializer(ModelSerializer):
     class Meta:
         model = BodyHeader
         fields = '__all__'
-        read_only_fields = ('created_at', )
+        read_only_fields = ('created_at', 'updated_at')

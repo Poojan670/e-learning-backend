@@ -5,7 +5,7 @@ from django.conf import settings
 from time import sleep
 
 
-@shared_task(bind=True, max_retries=20)
+@shared_task(max_retries=20)
 def register_mail(email, otp):
     print("Done")
     sleep(1)  # sleeps for 1 seconds
@@ -21,7 +21,7 @@ def register_mail(email, otp):
     sign_up.send()
 
 
-@shared_task(bind=True, max_retries=20)
+@shared_task(max_retries=20)
 def verify_mail(email):
     sleep(1)
     email_template = render_to_string('success.html')
@@ -35,7 +35,7 @@ def verify_mail(email):
     success.send()
 
 
-@shared_task(bind=True, max_retries=20)
+@shared_task(max_retries=20)
 def forgot_mail(email, otp):
     sleep(1)
     email_template = render_to_string('forgot.html',
@@ -50,7 +50,7 @@ def forgot_mail(email, otp):
     forgot.send()
 
 
-@shared_task(bind=True, max_retries=20)
+@shared_task(max_retries=20)
 def reset_mail(email):
     sleep(1)
     email_template = render_to_string('reset.html')
@@ -64,7 +64,7 @@ def reset_mail(email):
     reset.send()
 
 
-@shared_task(bind=True, max_retries=20)
+@shared_task(max_retries=20)
 def subscribed_mail(email):
     sleep(1)
     email_template = render_to_string('subscibe.html',

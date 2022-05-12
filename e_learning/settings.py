@@ -3,6 +3,7 @@ import os
 from datetime import timedelta, datetime
 from oauth2_provider import settings as oauth2_settings
 import environ
+import django_heroku
 
 
 env = environ.Env()
@@ -47,6 +48,7 @@ BUILTIN_APPS = [
 ]
 
 EXTERNAL_APPS = [
+    'channels',
     'oauth2_provider',
     'social_django',
     'rest_framework_social_oauth2',
@@ -54,10 +56,13 @@ EXTERNAL_APPS = [
     'django_filters',
     'django_countries',
     'drf_yasg',
+    'cloudinary_storage',
+    'cloudinary',
 ]
 
 INTERNAL_APPS = [
     'src.user',
+    'src.core',
     'src.billing',
     'src.payment',
     'src.home',
@@ -66,6 +71,8 @@ INTERNAL_APPS = [
     'src.references',
     'src.blog',
     'src.courses',
+    'src.chat',
+    'src.notification',
 ]
 
 INSTALLED_APPS = BUILTIN_APPS + EXTERNAL_APPS + INTERNAL_APPS
@@ -104,7 +111,8 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'e_learning.wsgi.application'
+# WSGI_APPLICATION = 'e_learning.wsgi.application'
+ASGI_APPLICATION = 'e_learning.routing.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
@@ -158,7 +166,11 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static')
+]
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
@@ -198,6 +210,7 @@ REST_FRAMEWORK = {
         'rest_framework_social_oauth2.authentication.SocialAuthentication',
         'rest_framework_simplejwt.authentication.JWTAuthentication',
         'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.BasicAuthentication',
     ),
 
     'DEFAULT_PERMISSION_CLASSES': [
@@ -307,3 +320,30 @@ CELERY_RESULT_BACKEND = 'redis://{}:{}'.format(
 CELERY_ACCEPT_CONTENT = ['application/json']
 CELERY_RESULT_SERIALIZER = 'json'
 CELERY_TASK_SERIALIZER = 'json'
+
+
+PAYPAL_RECEIVER_EMAIL = 'sb-yzqxd16116514@business.example.com'
+
+PAYPAL_TEST = True
+
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': 'djjrutwrk',
+    'API_KEY': '477229729243978',
+    'API_SECRET': 'U9GHPrmxvXnxoxaHUVpqHciHPTY'
+}
+
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels_redis.core.RedisChannelLayer",
+        "CONFIG": {
+            'hosts': [
+                'redis://127.0.0.1:6379',
+            ],
+        },
+    },
+}
+
+
+django_heroku.settings(locals())

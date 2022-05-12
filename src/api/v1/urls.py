@@ -12,9 +12,9 @@ urlpatterns = [
 
     path('references-app/', include('src.references.urls', namespace="references")),
 
-    path('blogs-app', include('src.blog.urls', namespace="blogs")),
+    path('blogs-app/', include('src.blog.urls', namespace="blogs")),
 
-    path('billing-app', include('src.billing.urls', namespace="billing")),
+    path('billing-app/', include('src.billing.urls', namespace="billing")),
 
     path('payment-app/', include('src.payment.urls', namespace="payment")),
 

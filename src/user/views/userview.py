@@ -42,7 +42,6 @@ class RegisterUser(generics.CreateAPIView):
             user.is_active = False
 
             register_mail.delay(user.email, user.otp)
-
             user.save()
 
             return Response({"user_id": user.id,
