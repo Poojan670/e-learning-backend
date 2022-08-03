@@ -46,7 +46,8 @@ class InstructorProfile(models.Model):
     @property
     def get_user_mail(self):
         return self.user.emai
-    
+
+
 class Category(MPTTModel):
     name = models.CharField(max_length=200)
     icon = models.ImageField(upload_to=category_image_path, blank=True)

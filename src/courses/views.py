@@ -111,7 +111,7 @@ class VideoSetionView(viewsets.ModelViewSet):
     http_method_names = ['get', 'head', 'post', 'patch', 'delete']
     filter_backends = (SearchFilter, OrderingFilter, DjangoFilterBackend)
     ordering_fields = ['id']
-    search_fields = ['section_title']
+    search_fields = ['section_title', 'course__title']
     filter_fields = ['section_title']
 
     def get_serializer_class(self):
@@ -183,9 +183,10 @@ class AnnouncementView(viewsets.ModelViewSet):
     serializer_class = AnnouncementSerializer
     queryset = Announcement.objects.all().order_by('id')
 
-    def get_permissions(self):
-        if self.request.method == 'POST':
-            return self.permission_classes == [IsAuthenticated]
-        elif self.request.method in ['PUT', 'PATCH', 'DELETE']:
-            return self.permission_classes == [AnnouncementObjectPermission]
-        return super().get_permissions()
+    # def get_permissions(self):
+    #     if self.request.method == 'POST':
+    #         return self.permission_classes == [IsAuthenticated]
+    #     elif self.request.method in ['PUT', 'PATCH', 'DELETE']:
+    #         return self.permission_classes == [AnnouncementObjectPermission]
+    #     # return self.permission_classes == [AnnouncementObjectPermission]
+    #     return super().get_permissions()

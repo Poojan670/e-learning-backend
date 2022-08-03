@@ -58,7 +58,7 @@ class ReviewsList(APIView):
 
     filter_backends = (SearchFilter, OrderingFilter, DjangoFilterBackend)
     search_fields = ['user', 'user__email', 'user__full_name']
-    filter_fields = ['user__full_name', 'user__email']
+    filter_fields = ['user__full_name', 'user__email', 'rating']
     ordering_fields = ['reviewed_at', 'id']
 
     def get(self, request):

@@ -1,5 +1,5 @@
 from django.core.management.base import BaseCommand
-from billing.models import BillingModel
+from src.billing.models import BillingModel
 
 # testing purposes!
 

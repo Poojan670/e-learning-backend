@@ -32,7 +32,8 @@ class SendEmailsView(APIView):
 
     def post(self, request, format=None):
         try:
-            r = requests.post("http://127.0.0.1:8001/api/v1/send/mail/")
+            r = requests.post(
+                "http://127.0.0.1:8001/api/v1/user-app/send/mail/")
         except:
             return Response({"msg": "Error Occured, Couldn't fetch from the given url"})
         if r.status_code == 200:
@@ -41,7 +42,7 @@ class SendEmailsView(APIView):
             return Response({"msg": "Bad Request, Please Try Again!"})
 
         try:
-            send_emails(data)
+            send_emails.delay(data)
         except Exception as e:
             return Response({"error": "Error occured due to {}".format(str(e))},
                             status=status.HTTP_400_BAD_REQUEST)

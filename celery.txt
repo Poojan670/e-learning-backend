@@ -9,3 +9,6 @@ celery -A e_learning worker --pool=solo --loglevel=info
 celery -A e_learning worker -l info --without-gossip --without-mingle
 celery -A e_learning worker --loglevel=INFO --without-gossip --without-mingle --without-heartbeat -Ofair
 
+
+# reset celery queue
+celery purge
